@@ -1,0 +1,12 @@
+div.MuiGrid-root.MuiGrid-item
+{
+	margin-top: 5px;
+	padding-bottom: 20px;
+}
+
+#title{
+	margin: 0px;
+}
+path{
+	fill:black
+}

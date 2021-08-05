@@ -1,0 +1,12 @@
+path {
+    fill: none !important;
+    stroke: #666;
+    stroke-width: 1.5px;
+  }
+  
+  circle {
+    fill: #ccc;
+    stroke: #fff;
+    stroke: black;
+    stroke-width: 1.5px;
+  }

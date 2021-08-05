@@ -1,0 +1,120 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with CSE6242 team 13 server code.
+  version: "1.0.0"
+  title: cordvis API Specification
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+definitions:
+  docInstance:
+    type: object
+    properties:
+      id:
+        type: string
+      Abstract:
+        type: string
+      Title:
+        type: string
+      Authors:
+        type: array
+        items:
+          type: string
+  answerInstance:
+    type: object
+    properties:
+      id:
+        type: integer
+      text:
+        type: string
+  coordInstance:
+    type: object
+    properties:
+      x:
+        type: number
+        format: float
+      y:
+        type: number
+        format: float
+  edgeInstance:
+    type: object
+    properties:
+      source:
+        type: string
+      target:
+        type: string
+
+
+# Paths supported by the server application
+paths:
+  /text/{query}:
+    get:
+      operationId: datavis.get_searchquery
+      tags:
+        - Query search
+      summary: Submit the search query from the user
+      parameters:
+        - name: query
+          in: path
+          description: query terms
+          type: string
+          required: true
+      responses:
+        200:
+          description: A list of papers' abstracts containg the query word
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/docInstance'
+  /qa/{question}:
+    get:
+      operationId: datavis.get_answers
+      tags:
+        - Question-answer
+      summary: Submit a question from the user
+      parameters:
+        - name: question
+          in: path
+          description: question sentence
+          type: string
+          required: true
+      responses:
+        200:
+          description: A list of answers for the question word
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/answerInstance'
+  /scatter:
+    get:
+      operationId: datavis.get_coordinates
+      tags:
+        - coordinate visualize
+      summary: Get coordinates
+      responses:
+        200:
+          description: A list of coordinates for papers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /edge:
+    get:
+      operationId: datavis.get_edges
+      tags:
+        - citation visualize
+      summary: Get edges
+      responses:
+        200:
+          description: A list of citation links for papers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/edgeInstance'
+
+
+
